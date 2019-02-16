@@ -2,12 +2,12 @@
   <div>
       <input v-model="username" placeholder="username" type="text">
       <input v-model="password" placeholder="password" type="password">
-      <button v-on:click="hash">Submit</button>
+      <button v-on:click="emitEvent">Submit</button>
   </div>
 </template>
 
 <script>
-var md5 = require('md5')
+// var md5 = require('md5')
 export default {
   username: '',
   password: '',
@@ -16,8 +16,10 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  hash () {
-    this.password = md5(this.password)
+  methods: {
+    emitEvent () {
+      this.$socket.emit('hello', this.msg)
+    }
   }
 }
 </script>
