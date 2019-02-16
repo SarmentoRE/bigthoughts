@@ -8,9 +8,9 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import VueNativeSock from 'vue-native-websocket'
 
-Vue.use(VueNativeSock, 'ws://localhost:9090', {
-  format: 'json',
+Vue.use(VueNativeSock, 'ws://localhost:9090/updater', {
   reconnection: true,
+  reconnectionDelay: 3000,
   reconnectionAttempts: 5 })
 Vue.use(VueMaterial)
 Vue.use(Vuex)
@@ -66,16 +66,42 @@ const store = new Vuex.Store({
 export default new Vuex.Store({
   state: {
     socket: {
-      message: ''
+      isConnected: false,
+      message: '',
+      reconnectError: false,
     }
   },
-  mutations: {
+  mutations:{
+    SOCKET_ONOPEN (state, event)  {
+      Vue.prototype.$socket = event.currentTarget
+      state.socket.isConnected = true
+      this.$socket.send('some data')
+    },
+    SOCKET_ONCLOSE (state, event)  {
+      state.socket.isConnected = false
+    },
+    SOCKET_ONERROR (state, event)  {
+      console.error(state, event)
+    },
     // default handler called for all methods
     SOCKET_ONMESSAGE (state, message) {
+      console.info(state, message)
       state.socket.message = message
       if (state.socket.message.function === 'addStudent') {
         store.commit('addStudent', message.classId, message.studentId, message.firstName, message.lastName)
       }
+    },
+    // mutations for reconnect methods
+    SOCKET_RECONNECT(state, count) {
+      console.info(state, count)
+    },
+    SOCKET_RECONNECT_ERROR(state) {
+      state.socket.reconnectError = true;
+    },
+  },
+  actions: {
+    sendMessage: function(context, message) {
+      Vue.prototype.$socket.send(message)
     }
   }
 })
