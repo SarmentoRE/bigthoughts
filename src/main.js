@@ -10,8 +10,8 @@ import VueNativeSock from 'vue-native-websocket'
 
 Vue.use(VueNativeSock, 'ws://localhost:9090/updater', {
   reconnection: true,
-  reconnectionDelay: 3000,
-  reconnectionAttempts: 5 })
+  reconnectionDelay: 3000
+})
 Vue.use(VueMaterial)
 Vue.use(Vuex)
 Vue.config.productionTip = false
@@ -68,19 +68,19 @@ export default new Vuex.Store({
     socket: {
       isConnected: false,
       message: '',
-      reconnectError: false,
+      reconnectError: false
     }
   },
-  mutations:{
-    SOCKET_ONOPEN (state, event)  {
+  mutations: {
+    SOCKET_ONOPEN (state, event) {
       Vue.prototype.$socket = event.currentTarget
       state.socket.isConnected = true
       this.$socket.send('some data')
     },
-    SOCKET_ONCLOSE (state, event)  {
+    SOCKET_ONCLOSE (state, event) {
       state.socket.isConnected = false
     },
-    SOCKET_ONERROR (state, event)  {
+    SOCKET_ONERROR (state, event) {
       console.error(state, event)
     },
     // default handler called for all methods
@@ -92,15 +92,15 @@ export default new Vuex.Store({
       }
     },
     // mutations for reconnect methods
-    SOCKET_RECONNECT(state, count) {
+    SOCKET_RECONNECT (state, count) {
       console.info(state, count)
     },
-    SOCKET_RECONNECT_ERROR(state) {
-      state.socket.reconnectError = true;
-    },
+    SOCKET_RECONNECT_ERROR (state) {
+      state.socket.reconnectError = true
+    }
   },
   actions: {
-    sendMessage: function(context, message) {
+    sendMessage: function (context, message) {
       Vue.prototype.$socket.send(message)
     }
   }
