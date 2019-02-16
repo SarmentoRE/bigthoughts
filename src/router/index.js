@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import ClassSelection from '@/components/ClassSelection'
 import Messages from '@/components/Messages'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ export default new Router({
           className: 'CMSC202'
         }]
       }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
