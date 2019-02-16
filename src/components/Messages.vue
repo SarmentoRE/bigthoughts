@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
     <div class="selector">
-        <div class="md-layout md-gutter md-alignment-top-center">
+        <div class="md-layout md-gutter md-alignment-center">
             <div class="md-layout-item md-size-25 ">
               <md-field>
                   <md-select v-model="classTA" id="classTAselector" placeholder="Class">
@@ -15,12 +15,12 @@
 
 <script>
 export default {
-  name: 'classselection',
-  props: ['classList'],
+  name: 'messages',
+  props: ['List'],
   data () {
     return {
       classTA: null,
-      classes: this.classList
+      classes: this.List
     }
   }
 }
