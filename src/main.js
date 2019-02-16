@@ -13,6 +13,9 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
+    firstName: '',
+    lastName: '',
+    taId = 0,
     classes: [{
       classId: 0,
       students: [{
@@ -20,6 +23,7 @@ const store = new Vuex.Store({
         firstName: '',
         lastName: '',
         messages: [{
+          messageId: 0,
           time: 0,
           author: 0,
           content: ''

@@ -26,12 +26,10 @@ export default new Router({
         },
         messages: {
           List: [{
-            classId: 1,
-            className: 'TODAY'
-          },
-          {
-            classId: 2,
-            className: 'AMANDA'
+            messageId: 1,
+            firstName: 'Amanda',
+            lastName: 'Smith',
+            content: 'HELLO'
           }]
         }
       }

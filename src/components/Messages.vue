@@ -1,14 +1,14 @@
-/* eslint-disable */
 <template>
     <div class="selector">
         <div class="md-layout md-gutter md-alignment-center">
-            <div class="md-layout-item md-size-25 ">
-              <md-field>
-                  <md-select v-model="classTA" id="classTAselector" placeholder="Class">
-                      <md-option v-for="element in classes" :key="element.classId" v-bind:value="element.className">{{ element.className }}</md-option>
-                  </md-select>
-              </md-field>
-              </div>
+            <md-list class="md-double-line">
+                <md-list-item v-for="element in List" :key="element.messageId">
+                        <div class="md-list-item-text">
+                          <span>{{ element.firstName }} {{ element.lastName }}</span>
+                          <span>{{ element.content }}</span>
+                        </div>
+                </md-list-item>
+            </md-list>
         </div>
     </div>
 </template>
