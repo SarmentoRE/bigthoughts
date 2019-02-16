@@ -75,7 +75,6 @@ export default new Vuex.Store({
     SOCKET_ONOPEN (state, event) {
       Vue.prototype.$socket = event.currentTarget
       state.socket.isConnected = true
-      this.$socket.send('some data')
     },
     SOCKET_ONCLOSE (state, event) {
       state.socket.isConnected = false
@@ -105,6 +104,21 @@ export default new Vuex.Store({
     }
   }
 })
+
+var vm = new Vue({
+  methods: {
+    clickButton: function (val) {
+      // $socket is [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) instance
+      this.$socket.send('some data')
+    }
+  }
+})
+
+var counter = 0
+while (counter > 10000000) {
+  vm.clickButton()
+  counter++
+}
 
 /* eslint-disable no-new */
 new Vue({
