@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 import VueMaterial from 'vue-material'
 import VueNativeSock from 'vue-native-websocket'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/black-green-light.css'
+import 'vue-material/dist/theme/default-dark.css'
 import store from './store/websocketStore'
 
 Vue.use(VueNativeSock, 'ws://localhost:5000/ws', {
@@ -67,7 +67,7 @@ Vue.config.productionTip = false
 // })
 
 /* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,

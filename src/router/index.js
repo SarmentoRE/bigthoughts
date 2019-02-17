@@ -13,7 +13,7 @@ export default new Router({
     {
       path: '/classes',
       name: 'allClasses',
-      components: {default: ClassSelection, messages: Messages, students: Students},
+      components: {default: ClassSelection},//, messages: Messages, students: Students},
       // we can pass class list to Class selection from the router
       props: {
         default: {
@@ -26,48 +26,48 @@ export default new Router({
             className: 'CMSC202'
           }]
         },
-        messages: {
-          List: [{
-            messageId: 1,
-            firstName: 'Amanda',
-            lastName: 'Smith',
-            content: 'HELLO HOW ARE YOU I HAVE A QUESTION ONLY YOU CAN ANSWER SENPAI',
-            time: '12:56pm'
-          },
-          {
-            messageId: 2,
-            firstName: 'Tim',
-            lastName: 'Keith',
-            content: 'HOWDY',
-            time: '12:57pm'
-          },
-          {
-            messageId: 3,
-            firstName: 'Amanda',
-            lastName: 'Smith',
-            content: 'WAZZUP',
-            time: '12:59pm'
-          },
-          {
-            messageId: 4,
-            firstName: 'Tim',
-            lastName: 'Keith',
-            content: 'HEY',
-            time: '1:30pm'
-          }]
-        },
-        students: {
-          Child: [{
-            studentId: 1,
-            firstName: 'Rick',
-            lastName: 'Astley'
-          },
-          {
-            studentId: 2,
-            firstName: 'Tommy',
-            lastName: 'LIL'
-          }
-          ]}
+        // messages: {
+        //   List: [{
+        //     messageId: 1,
+        //     firstName: 'Amanda',
+        //     lastName: 'Smith',
+        //     content: 'HELLO HOW ARE YOU I HAVE A QUESTION ONLY YOU CAN ANSWER SENPAI',
+        //     time: '12:56pm'
+        //   },
+        //   {
+        //     messageId: 2,
+        //     firstName: 'Tim',
+        //     lastName: 'Keith',
+        //     content: 'HOWDY',
+        //     time: '12:57pm'
+        //   },
+        //   {
+        //     messageId: 3,
+        //     firstName: 'Amanda',
+        //     lastName: 'Smith',
+        //     content: 'WAZZUP',
+        //     time: '12:59pm'
+        //   },
+        //   {
+        //     messageId: 4,
+        //     firstName: 'Tim',
+        //     lastName: 'Keith',
+        //     content: 'HEY',
+        //     time: '1:30pm'
+        //   }]
+        // },
+        // students: {
+        //   Child: [{
+        //     studentId: 1,
+        //     firstName: 'Rick',
+        //     lastName: 'Astley'
+        //   },
+        //   {
+        //     studentId: 2,
+        //     firstName: 'Tommy',
+        //     lastName: 'LIL'
+        //   }
+        //   ]}
       }
     },
     {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { getField, updateField } from 'vuex-map-fields';
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,11 @@ export default new Vuex.Store({
   state: {
     username: '',
     password: '',
+    curTypedMessage: '',
+    selectedClass: {},
+    classes: [],
+    students: [],
+    messages: [],
     socket: {
       isConnected: false,
       message: '',
@@ -15,6 +21,15 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SET_CLASSES(state,classes) {
+        state.classes = classes
+    },
+    SET_MESSAGES(state,messages) {
+        state.messages = messages
+    },
+    SET_STUDENTS(state,students){
+      state.students = students
+    },
     SOCKET_ONOPEN (state, event) {
       Vue.prototype.$socket = event.currentTarget
       state.socket.isConnected = true
@@ -40,8 +55,76 @@ export default new Vuex.Store({
   },
   actions: {
     sendMessage: function (context, message) {
-      Vue.prototype.$socket.send(message)
+      // post to the backend to send a message
+    },
+    loadClasses: function (context, taid){
+      this.commit('SET_CLASSES', [
+        {
+          phone: '5408347842',
+          name: 'CMSC502',
+          id: '1'
+        },  {
+          phone: '5407489743',
+          name: 'CMSC603',
+          id: '2'
+        }
+    ])
+     axios.get('/tas'+taid+'/classes')
+      .then(r=> r.data)
+      .then(classes => {
+        this.commit(SET_CLASSES, blah)
+      })
+     
+    },
+    loadStudents: function (context, classId){
+      this.commit('SET_STUDENTS', [
+        {
+          studentId: 1,
+          firstName: 'Asshat',
+          lastName: 'diskface',
+          phoneNumber: '5408347842'
+        },  {
+          studentId: 2,
+          firstName: 'justin',
+          lastName: 'miller',
+          phoneNumber: '7578493317'
+        },{
+          studentId: 3,
+          firstName: 'Sarmento',
+          lastName: 'Austin',
+          phoneNumber: '5407489743'
+        }
+      ]
+    )
+      axios.get('/classes/'+classId)
+      .then(r=> r.data)
+      .then(classes => {
+        this.commit(SET_CLASSES, blah)
+      })
+  },
+  loadMessages: function(context,studentId){ 
+    this.commit('SET_MESSAGES', [
+    {
+      studentId: 1,
+      firstName: 'Asshat',
+      lastName: 'diskface'
+    },  {
+      studentId: 2,
+      firstName: 'justin',
+      lastName: 'miller'
+    },{
+      studentId: 3,
+      firstName: 'Sarmento',
+      lastName: 'Austin'
     }
+  ]
+)
+axios.get('/messages/'+studentId)
+  .then(r=> r.data)
+  .then(messages => {
+    this.commit(SET_MESSAGES, messages)
+  })
+  }
   },
   getters: {
     getField,
