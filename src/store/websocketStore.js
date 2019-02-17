@@ -11,6 +11,7 @@ export default new Vuex.Store({
     password: '',
     curTypedMessage: '',
     selectedClass: {},
+    selectedStudent: {},
     classes: [],
     students: [],
     messages: [],
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SELECT_STUDENT(state,student){
+      state.selectedStudent = student
+    },
     SET_CLASSES(state,classes) {
         state.classes = classes
     },
@@ -54,48 +58,58 @@ export default new Vuex.Store({
     updateField
   },
   actions: {
-    sendMessage: function (context, message) {
+    sendMessage: function (context,selectedStudent,selectedClass,curTypedMessage) {
       // post to the backend to send a message
+      console.log(selectedClass)
+      console.log(curTypedMessage)
+      console.log(this.state.selectedClass)
+      axios.post('http://localhost:5000'+'/messages',{
+        studentNumber: selectedStudent.studentId,
+        phoneNumber: selectedStudent.phoneNumber,
+        classId: this.state.selectedClass,
+        message: this.state.curTypedMessage
+      })
     },
     loadClasses: function (context, taid){
-    //   this.commit('SET_CLASSES', [
-    //     {
-    //       phone: '5408347842',
-    //       name: 'CMSC502',
-    //       id: '1'
-    //     },  {
-    //       phone: '5407489743',
-    //       name: 'CMSC603',
-    //       id: '2'
-    //     }
-    // ])
-     axios.get(window.location.origin +'/tas/'+this.$store.username+'/classes')
+      this.commit('SET_CLASSES', [
+        {
+          phone: '5408347842',
+          name: 'CMSC502',
+          id: '1'
+        },  {
+          phone: '5407489743',
+          name: 'CMSC603',
+          id: '2'
+        }
+    ])
+     axios.get('http://localhost:5000' +'/tas/'+this.state.username+'/classes')
       .then(r=> r.data)
       .then(classes => {
-        this.commit(SET_CLASSES, classes)
+        console.log(classes)
+        this.commit('SET_CLASSES', classes)
       })
      
     },
     loadStudents: function (context, classId){
-      this.commit('SET_STUDENTS', [
-        {
-          studentId: 1,
-          firstName: 'Asshat',
-          lastName: 'diskface',
-          phoneNumber: '5408347842'
-        },  {
-          studentId: 2,
-          firstName: 'justin',
-          lastName: 'miller',
-          phoneNumber: '7578493317'
-        },{
-          studentId: 3,
-          firstName: 'Sarmento',
-          lastName: 'Austin',
-          phoneNumber: '5407489743'
-        }
-      ]
-    )
+    //   this.commit('SET_STUDENTS', [
+    //     {
+    //       studentId: 1,
+    //       firstName: 'Asshat',
+    //       lastName: 'diskface',
+    //       phoneNumber: '5408347842'
+    //     },  {
+    //       studentId: 2,
+    //       firstName: 'justin',
+    //       lastName: 'miller',
+    //       phoneNumber: '7578493317'
+    //     },{
+    //       studentId: 3,
+    //       firstName: 'Sarmento',
+    //       lastName: 'Austin',
+    //       phoneNumber: '5407489743'
+    //     }
+    //   ]
+    // )
       axios.get('/classes/'+classId)
       .then(r=> r.data)
       .then(classes => {

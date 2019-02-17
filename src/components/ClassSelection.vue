@@ -4,18 +4,11 @@
             <div class="md-layout-item md-size-25 ">
               <md-field>
                   <md-select v-model="selectedClass" id="classTAselector" placeholder="Class" @md-selected="getStudents($event)">
-                      <md-option v-for="element in classes" :key="element.id" v-bind:value="element.name">{{ element.name }}</md-option>
+                      <md-option v-for="element in classes" :key="element.classId" v-bind:value="element.classId">{{ element.className }}</md-option>
                   </md-select>
               </md-field>
               </div>
         </div>
-        <!-- <div v-if="studentCounter > 1" >
-          <md-list-item  v-for="student in students" :key="student.studentId">
-              <md-button class="md-primary md-raised" @click.native="selectStudent(student)">
-                  <span>{{ student.firstName }} {{ student.lastName }}</span>
-              </md-button>
-          </md-list-item>
-        </div> -->
         <div v-if="studentCounter>1" class="page-container md-alignment-center-center">
       <md-app>
         <md-app-toolbar class="md-primary">
@@ -52,7 +45,7 @@
             <label>Message</label>
             <md-textarea v-model="curTypedMessage" md-autogrow></md-textarea>
          </md-field>
-         <md-button>
+         <md-button @click.native="sendMessage($event)">
            <span>Send</span>
          </md-button>
         </md-app-content>
@@ -79,17 +72,29 @@ export default {
       'classes',
       'students',
       'messages',
-      'curTypedMessage'
+      'curTypedMessage',
+      'selectedStudent'
     ])
   },
   methods: {
   selectStudent: function(e){
     console.log(e)
+    this.selectedStudent=e
+      // this.$store.commit('SELECT_STUDENT',{
+      //   firstName: e.firstName,
+      //   lastName: e.lastName,
+      //   phoneNumber: e.phoneNumber,
+      //   studentId: e.studentId
+      // })
   },
     getStudents: function(e){
       console.log(e)
       this.studentCounter++
-      this.$store.dispatch('loadStudents')
+      this.$store.dispatch('loadStudents',this.selectedClass)
+    },
+    sendMessage: function(e){
+      console.log(e)
+      this.$store.dispatch('sendMessage',this.selectedStudent,this.selectedClass,this.curTypedMessage)
     }
   },
   
