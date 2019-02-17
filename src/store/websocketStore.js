@@ -58,21 +58,21 @@ export default new Vuex.Store({
       // post to the backend to send a message
     },
     loadClasses: function (context, taid){
-      this.commit('SET_CLASSES', [
-        {
-          phone: '5408347842',
-          name: 'CMSC502',
-          id: '1'
-        },  {
-          phone: '5407489743',
-          name: 'CMSC603',
-          id: '2'
-        }
-    ])
-     axios.get('/tas'+taid+'/classes')
+    //   this.commit('SET_CLASSES', [
+    //     {
+    //       phone: '5408347842',
+    //       name: 'CMSC502',
+    //       id: '1'
+    //     },  {
+    //       phone: '5407489743',
+    //       name: 'CMSC603',
+    //       id: '2'
+    //     }
+    // ])
+     axios.get(window.location.origin +'/tas/'+this.$store.username+'/classes')
       .then(r=> r.data)
       .then(classes => {
-        this.commit(SET_CLASSES, blah)
+        this.commit(SET_CLASSES, classes)
       })
      
     },

@@ -13,7 +13,7 @@ import store from './store/websocketStore'
 Vue.use(VueNativeSock, 'ws://localhost:5000/ws', {
   store: store,
   reconnection: true,
-  reconnectionAttempts: 20
+  reconnectionAttempts: 2
 })
 Vue.use(VueMaterial)
 Vue.use(Vuex)

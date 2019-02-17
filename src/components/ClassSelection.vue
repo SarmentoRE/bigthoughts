@@ -94,7 +94,7 @@ export default {
   },
   
   created() {
-    this.$store.dispatch('loadClasses')
+    this.$store.dispatch('loadClasses',this.$store.username)
   }
 }
 </script>
