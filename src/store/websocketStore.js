@@ -110,10 +110,11 @@ export default new Vuex.Store({
     //     }
     //   ]
     // )
-      axios.get('/classes/'+classId)
+      axios.get('http://localhost:5000'+'/classes/'+classId+'/students')
       .then(r=> r.data)
-      .then(classes => {
-        this.commit(SET_CLASSES, blah)
+      .then(students => {
+        console.log(students)
+        this.commit(SET_CLASSES, students)
       })
   },
   loadMessages: function(context,studentId){ 
