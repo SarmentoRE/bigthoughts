@@ -9,21 +9,21 @@
             Students
           </md-toolbar>
           <md-list>
-              <md-list-item v-for="student in students" :key="student.studentId">
-                  <div class="md-list-item-text">
-                    <span>{{ student.firstName }} {{ student.lastName }}</span>
-                  </div>
-              </md-list-item>
+            <md-list-item v-for="student in kids" :key="student.studentId">
+              <div class="md-list-item-text">
+                <span>{{ student.firstName }} {{ student.lastName }}</span>
+              </div>
+            </md-list-item>
           </md-list>
         </md-app-drawer>
         <md-app-content>
           <md-list>
             <md-list-item v-for="element in List" :key="element.messageId">
               <div class="md-list-item-text">
-                <dic class="md-alignment-horizontal">
+                <div class="md-alignment-horizontal">
                 <span>{{ element.firstName }} {{ element.lastName }} </span>
                 <span class="md-alignment-center-right">{{element.time}}</span>
-              </dic>
+              </div>
                 <span>{{ element.content }}</span>
                 <md-divider></md-divider>
               </div>
@@ -37,11 +37,13 @@
 <script>
 export default {
   name: 'messages',
-  props: ['List', 'students'],
+  props: ['Child', 'List'],
   data () {
+    console.log(this.Child)
     return {
       classTA: null,
-      classes: this.List
+      classes: this.List,
+      kids: this.Child
     }
   }
 }

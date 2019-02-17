@@ -2,7 +2,7 @@
   <div id="app">
    <!-- <img src="./assets/logo.png"> -->
     <router-view/>
-    <router-view name="messages"></router-view>
+    <router-view name="messages"><router-view name="students"></router-view></router-view>
   </div>
 </template>
 

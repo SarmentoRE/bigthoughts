@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import ClassSelection from '@/components/ClassSelection'
 import Messages from '@/components/Messages'
 import Login from '@/components/Login'
+import Students from '@/components/Students'
 
 Vue.use(Router)
 
@@ -12,7 +13,7 @@ export default new Router({
     {
       path: '/classes',
       name: 'allClasses',
-      components: {default: ClassSelection, messages: Messages},
+      components: {default: ClassSelection, messages: Messages, students: Students},
       // we can pass class list to Class selection from the router
       props: {
         default: {
@@ -55,17 +56,19 @@ export default new Router({
             time: '1:30pm'
           }]
         },
-        students: [{
-          studentId: 1,
-          firstName: 'Rick',
-          lastName: 'Astley'
-        },
-        {
-          studentId: 2,
-          firstName: 'Tommy',
-          lastName: 'LIL'
-        }
-        ]}
+        students: {
+          Child: [{
+            studentId: 1,
+            firstName: 'Rick',
+            lastName: 'Astley'
+          },
+          {
+            studentId: 2,
+            firstName: 'Tommy',
+            lastName: 'LIL'
+          }
+          ]}
+      }
     },
     {
       path: '/',
