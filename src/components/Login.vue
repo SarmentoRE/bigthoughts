@@ -1,8 +1,17 @@
 <template>
   <div>
+      <h2 class="md-display-3">TA log in</h2>
+      <div class="md-layout md-alignment-vertical md-size-50">
+          <div class="md-layout-item md-alignment-vertical" style="padding:5px">
       <input v-model="username" placeholder="username" type="text">
+      <div class="md-layout-item md-alignment-vertical" style="padding:5px">
       <input v-model="password" placeholder="password" type="password">
+    <div class="md-layout-item md-alignment-vertical" style="padding:5px">
       <button v-on:click="emitEvent()">Submit</button>
+    </div>
+      </div>
+          </div>
+          </div>
   </div>
 </template>
 

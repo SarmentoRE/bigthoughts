@@ -1,22 +1,43 @@
 <template>
-    <div class="selector">
-        <div class="md-layout md-gutter md-alignment-center">
-            <md-list class="md-double-line">
-                <md-list-item v-for="element in List" :key="element.messageId">
-                        <div class="md-list-item-text">
-                          <span>{{ element.firstName }} {{ element.lastName }}</span>
-                          <span>{{ element.content }}</span>
-                        </div>
-                </md-list-item>
-            </md-list>
-        </div>
+    <div class="page-container md-alignment-center-center">
+      <md-app>
+        <md-app-toolbar class="md-primary">
+          <span class="md-title">Messages</span>
+        </md-app-toolbar>
+        <md-app-drawer md-permanent="full">
+          <md-toolbar class="md-transparent" md-elevation="0">
+            Students
+          </md-toolbar>
+          <md-list>
+              <md-list-item v-for="student in students" :key="student.studentId">
+                  <div class="md-list-item-text">
+                    <span>{{ student.firstName }} {{ student.lastName }}</span>
+                  </div>
+              </md-list-item>
+          </md-list>
+        </md-app-drawer>
+        <md-app-content>
+          <md-list>
+            <md-list-item v-for="element in List" :key="element.messageId">
+              <div class="md-list-item-text">
+                <dic class="md-alignment-horizontal">
+                <span>{{ element.firstName }} {{ element.lastName }} </span>
+                <span class="md-alignment-center-right">{{element.time}}</span>
+              </dic>
+                <span>{{ element.content }}</span>
+                <md-divider></md-divider>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-app-content>
+      </md-app>
     </div>
-</template>
+  </template>
 
 <script>
 export default {
   name: 'messages',
-  props: ['List'],
+  props: ['List', 'students'],
   data () {
     return {
       classTA: null,

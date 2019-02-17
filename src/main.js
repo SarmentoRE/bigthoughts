@@ -7,9 +7,10 @@ import Vuex from 'vuex'
 import VueMaterial from 'vue-material'
 import VueNativeSock from 'vue-native-websocket'
 import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/black-green-light.css'
 import store from './store/websocketStore'
 
-Vue.use(VueNativeSock, 'ws://localhost:8080/sockjs-node/218/oinu33eb/websocket', {
+Vue.use(VueNativeSock, 'ws://localhost:5000/ws', {
   store: store,
   reconnection: true,
   reconnectionAttempts: 20
@@ -21,7 +22,7 @@ Vue.config.productionTip = false
 // Front-end data structure
 // A given TA has classes that they TA for, each class has student, and students may send messages
 // const store = new Vuex.Store({
-//   state: {1
+//   state: {
 //     firstName: '',
 //     lastName: '',
 //     taId: 0,
