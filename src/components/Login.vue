@@ -2,13 +2,14 @@
   <div>
       <input v-model="username" placeholder="username" type="text">
       <input v-model="password" placeholder="password" type="password">
-      <button v-on:click="emitEvent">Submit</button>
+      <button v-on:click="emitEvent()">Submit</button>
   </div>
 </template>
 
 <script>
 // var md5 = require('md5')
 export default {
+  store: '',
   username: '',
   password: '',
   data () {
@@ -18,7 +19,9 @@ export default {
   },
   methods: {
     emitEvent () {
-      this.$socket.emit('hello', this.msg)
+      this.$socket.message = 'Hello from websockets'
+      this.$socket.send('hi')
+      console.log('sending message')
     }
   }
 }

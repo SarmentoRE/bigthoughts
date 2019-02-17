@@ -5,11 +5,11 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import VueMaterial from 'vue-material'
+import VueNativeSock from 'vue-native-websocket'
 import 'vue-material/dist/vue-material.min.css'
-import VueSocketio from 'vue-socket.io'
-import store from './store/store'
+import store from './store/websocketStore'
 
-Vue.use(VueSocketio, `ws://localhost/5000`, store)
+Vue.use(VueNativeSock, 'ws://localhost:9090', { store: store })
 Vue.use(VueMaterial)
 Vue.use(Vuex)
 Vue.config.productionTip = false
@@ -17,7 +17,7 @@ Vue.config.productionTip = false
 // Front-end data structure
 // A given TA has classes that they TA for, each class has student, and students may send messages
 // const store = new Vuex.Store({
-//   state: {
+//   state: {1
 //     firstName: '',
 //     lastName: '',
 //     taId: 0,
