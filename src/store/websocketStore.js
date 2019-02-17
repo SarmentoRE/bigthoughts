@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getField, updateField } from 'vuex-map-fields';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    username: '',
+    password: '',
     socket: {
       isConnected: false,
       message: '',
@@ -32,11 +35,15 @@ export default new Vuex.Store({
     },
     SOCKET_RECONNECT_ERROR (state) {
       state.socket.reconnectError = true
-    }
+    },
+    updateField
   },
   actions: {
     sendMessage: function (context, message) {
       Vue.prototype.$socket.send(message)
     }
+  },
+  getters: {
+    getField,
   }
 })

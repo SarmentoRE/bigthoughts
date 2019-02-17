@@ -7,7 +7,7 @@
       <div class="md-layout-item md-alignment-vertical" style="padding:5px">
       <input v-model="password" placeholder="password" type="password">
     <div class="md-layout-item md-alignment-vertical" style="padding:5px">
-      <button v-on:click="emitEvent()">Submit</button>
+      <button v-on:click="submitLogin()">Submit</button>
     </div>
       </div>
           </div>
@@ -17,21 +17,27 @@
 
 <script>
 // var md5 = require('md5')
+import { mapFields } from 'vuex-map-fields';
+
 export default {
   store: '',
-  username: '',
-  password: '',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
-    emitEvent () {
-      this.$socket.message = 'Hello from websockets'
+    submitLogin () {
       this.$socket.send('hi')
       console.log('sending message')
+      this.$router.push('/classes')
     }
+  },
+  computed:{
+    ...mapFields([
+      'username',
+      'password',
+    ])
   }
 }
 </script>
