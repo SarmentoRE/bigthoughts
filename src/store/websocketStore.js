@@ -60,10 +60,7 @@ export default new Vuex.Store({
   actions: {
     sendMessage: function (context,selectedStudent,selectedClass,curTypedMessage) {
       // post to the backend to send a message
-      console.log(selectedClass)
-      console.log(curTypedMessage)
-      console.log(this.state.selectedClass)
-      axios.post('http://localhost:5000'+'/messages',{
+      axios.post(window.location.origin+'/messages',{
         studentNumber: selectedStudent.studentId,
         phoneNumber: selectedStudent.phoneNumber,
         classId: this.state.selectedClass,
@@ -82,7 +79,7 @@ export default new Vuex.Store({
           id: '2'
         }
     ])
-     axios.get('http://localhost:5000' +'/tas/'+this.state.username+'/classes')
+     axios.get(window.location.origin+'/tas/'+this.state.username+'/classes')
       .then(r=> r.data)
       .then(classes => {
         console.log(classes)
@@ -110,34 +107,34 @@ export default new Vuex.Store({
     //     }
     //   ]
     // )
-      axios.get('http://localhost:5000'+'/classes/'+classId+'/students')
+      axios.get(window.location.origin+'/classes/'+classId+'/students')
       .then(r=> r.data)
       .then(students => {
         console.log(students)
-        this.commit(SET_CLASSES, students)
+        this.commit('SET_CLASSES', students)
       })
   },
   loadMessages: function(context,studentId){ 
-    this.commit('SET_MESSAGES', [
-    {
-      studentId: 1,
-      firstName: 'Asshat',
-      lastName: 'diskface'
-    },  {
-      studentId: 2,
-      firstName: 'justin',
-      lastName: 'miller'
-    },{
-      studentId: 3,
-      firstName: 'Sarmento',
-      lastName: 'Austin'
-    }
-  ]
-)
-axios.get('/messages/'+studentId)
+//     this.commit('SET_MESSAGES', [
+//     {
+//       studentId: 1,
+//       firstName: 'Asshat',
+//       lastName: 'diskface'
+//     },  {
+//       studentId: 2,
+//       firstName: 'justin',
+//       lastName: 'miller'
+//     },{
+//       studentId: 3,
+//       firstName: 'Sarmento',
+//       lastName: 'Austin'
+//     }
+//   ]
+// )
+axios.get(window.location.origin+'/messages/'+studentId)
   .then(r=> r.data)
   .then(messages => {
-    this.commit(SET_MESSAGES, messages)
+    this.commit('SET_MESSAGES', messages)
   })
   }
   },
