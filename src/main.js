@@ -9,7 +9,11 @@ import VueNativeSock from 'vue-native-websocket'
 import 'vue-material/dist/vue-material.min.css'
 import store from './store/websocketStore'
 
-Vue.use(VueNativeSock, 'ws://localhost:9090', { store: store })
+Vue.use(VueNativeSock, 'ws://localhost:8080/sockjs-node/218/oinu33eb/websocket', {
+  store: store,
+  reconnection: true,
+  reconnectionAttempts: 20
+})
 Vue.use(VueMaterial)
 Vue.use(Vuex)
 Vue.config.productionTip = false
